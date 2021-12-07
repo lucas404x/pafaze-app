@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'services/storage_hive_service.dart';
+import 'services/storage_service.dart';
 import 'data/models/task_model.dart';
-import 'data/repositories/repository_interface.dart';
 import 'data/repositories/repository_task.dart';
 
 import 'views/home_page.dart';
@@ -20,9 +21,13 @@ setup() async {
   await Hive.initFlutter();
   Hive.registerAdapter(TaskModelAdapter());
 
-  // setup get_it
+  // setup repositories
   var taskBox = await Hive.openBox<TaskModel>("task");
-  getIt.registerSingleton<IRepository>(RepositoryTask(taskBox));
+  var repoTask = RepositoryTask(taskBox);
+
+  // setup services
+  var storageHiveService = StorageHiveService(repoTask);
+  getIt.registerSingleton<StorageService>(StorageService(storageHiveService));
 }
 
 class MyApp extends StatelessWidget {

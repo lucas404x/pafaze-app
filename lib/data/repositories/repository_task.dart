@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
-import 'repository_interface.dart';
+
+import '../interfaces/repository_interface.dart';
 
 class RepositoryTask<TaskModel> implements IRepository {
   late final Box<TaskModel> _taskBox;
