@@ -1,7 +1,13 @@
-import '../data/interfaces/storage_service_interface.dart';
+import '../data/repositories/hive_repository.dart';
+
+import '../data/models/task_model.dart';
 
 class StorageService {
-  IStorageService _storageHiveService;
+  final HiveRepository<TaskModel> _hiveRepository;
 
-  StorageService(this._storageHiveService);
+  StorageService(this._hiveRepository);
+
+  Future<List<TaskModel>> getTasks() async {
+    return await _hiveRepository.getAllAsync();
+  }
 }

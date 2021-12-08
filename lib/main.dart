@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'services/storage_hive_service.dart';
 import 'services/storage_service.dart';
 import 'data/models/task_model.dart';
-import 'data/repositories/repository_task.dart';
+import 'data/repositories/hive_repository.dart';
 
 import 'views/home_page.dart';
 
@@ -23,11 +22,10 @@ setup() async {
 
   // setup repositories
   var taskBox = await Hive.openBox<TaskModel>("task");
-  var repoTask = RepositoryTask(taskBox);
 
   // setup services
-  var storageHiveService = StorageHiveService(repoTask);
-  getIt.registerSingleton<StorageService>(StorageService(storageHiveService));
+  var hiveRepository = HiveRepository<TaskModel>(taskBox);
+  getIt.registerSingleton<StorageService>(StorageService(hiveRepository));
 }
 
 class MyApp extends StatelessWidget {
@@ -39,7 +37,7 @@ class MyApp extends StatelessWidget {
       title: 'Pafaze',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          primarySwatch: Colors.grey,
+          primaryColor: Colors.black,
           textTheme: TextTheme(
             headline1: GoogleFonts.openSans(
                 fontSize: 81, fontWeight: FontWeight.w300, letterSpacing: -1.5),
@@ -67,10 +65,7 @@ class MyApp extends StatelessWidget {
                 fontSize: 10, fontWeight: FontWeight.w400, letterSpacing: 0.4),
             overline: GoogleFonts.openSans(
                 fontSize: 8, fontWeight: FontWeight.w400, letterSpacing: 1.5),
-          ).apply(
-              bodyColor: Colors.white,
-              displayColor: Colors.white,
-              decorationColor: Colors.white)),
+          )),
       home: const HomePage(),
     );
   }
