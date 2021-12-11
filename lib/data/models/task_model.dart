@@ -21,4 +21,7 @@ class TaskModel {
 
   @HiveField(5)
   late DateTime dateToDelivery;
+
+  @HiveField(6)
+  late bool isToDelivery;
 }
