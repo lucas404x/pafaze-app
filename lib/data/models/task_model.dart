@@ -1,5 +1,4 @@
 import 'package:hive/hive.dart';
-import '../enumerators/enum_task_priority.dart';
 
 part 'task_model.g.dart';
 
@@ -21,5 +20,5 @@ class TaskModel {
   late DateTime dateCreated;
 
   @HiveField(5)
-  late TaskPriority priority;
+  late DateTime dateToDelivery;
 }

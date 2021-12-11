@@ -22,7 +22,7 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
       ..description = fields[2] as String
       ..isDone = fields[3] as bool
       ..dateCreated = fields[4] as DateTime
-      ..priority = fields[5] as TaskPriority;
+      ..dateToDelivery = fields[5] as DateTime;
   }
 
   @override
@@ -40,7 +40,7 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
       ..writeByte(4)
       ..write(obj.dateCreated)
       ..writeByte(5)
-      ..write(obj.priority);
+      ..write(obj.dateToDelivery);
   }
 
   @override

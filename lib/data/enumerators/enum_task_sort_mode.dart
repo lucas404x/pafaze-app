@@ -1,1 +1,6 @@
-enum TaskSortMode { date, priority, ascendingTitle, descendingTitle }
+enum TaskSortMode {
+  dateCreated,
+  dateToDelivery,
+  ascendingTitle,
+  descendingTitle
+}

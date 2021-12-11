@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'services/storage_service.dart';
+
 import 'data/models/task_model.dart';
 import 'data/repositories/hive_repository.dart';
-
+import 'services/storage_service.dart';
+import 'views/add_task_page.dart';
 import 'views/home_page.dart';
 
 final getIt = GetIt.instance;
@@ -36,6 +37,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Pafaze',
       debugShowCheckedModeBanner: false,
+      initialRoute: HomePage.route,
+      routes: {
+        HomePage.route: (context) => const HomePage(),
+        AddTaskPage.route: (context) => const AddTaskPage()
+      },
       theme: ThemeData(
           primaryColor: Colors.black,
           textTheme: TextTheme(
@@ -66,7 +72,6 @@ class MyApp extends StatelessWidget {
             overline: GoogleFonts.openSans(
                 fontSize: 8, fontWeight: FontWeight.w400, letterSpacing: 1.5),
           )),
-      home: const HomePage(),
     );
   }
 }
