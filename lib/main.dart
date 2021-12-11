@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 
 import 'data/models/task_model.dart';
 import 'data/repositories/hive_repository.dart';
@@ -22,11 +24,15 @@ setup() async {
   Hive.registerAdapter(TaskModelAdapter());
 
   // setup repositories
-  var taskBox = await Hive.openBox<TaskModel>("task");
+  var taskBox = await Hive.openBox<TaskModel>('task');
 
   // setup services
   var hiveRepository = HiveRepository<TaskModel>(taskBox);
   getIt.registerSingleton<StorageService>(StorageService(hiveRepository));
+
+  // setup app locale
+  await initializeDateFormatting('pt_BR', null);
+  Intl.defaultLocale = 'pt_BR';
 }
 
 class MyApp extends StatelessWidget {
