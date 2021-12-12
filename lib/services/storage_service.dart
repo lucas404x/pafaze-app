@@ -9,6 +9,10 @@ class StorageService {
 
   StorageService(this._hiveRepository);
 
+  Future<TaskModel?> getTask(String id) {
+    return _hiveRepository.getAsync(id);
+  }
+
   Future<List<TaskModel>> getTasks() async {
     return await _hiveRepository.getAllAsync();
   }
@@ -21,5 +25,9 @@ class StorageService {
 
   Future<bool> removeTask(String id) {
     return _hiveRepository.deleteAsync(id);
+  }
+
+  Future<bool> updateTask(String id, TaskModel task) {
+    return _hiveRepository.editAsync(id, task);
   }
 }
