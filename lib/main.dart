@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:pafaze/views/edit_task_page.dart';
 
 import 'data/models/task_model.dart';
 import 'data/repositories/hive_repository.dart';
@@ -46,11 +47,13 @@ class MyApp extends StatelessWidget {
       initialRoute: HomePage.route,
       routes: {
         HomePage.route: (context) => const HomePage(),
-        AddTaskPage.route: (context) => const AddTaskPage()
+        AddTaskPage.route: (context) => const AddTaskPage(),
+        EditTaskPage.route: (context) => const EditTaskPage()
       },
       theme: ThemeData(
           primaryColor: Colors.black,
           scaffoldBackgroundColor: const Color(0xFFF9F9F9),
+          splashColor: Colors.blue,
           textTheme: TextTheme(
             headline1: GoogleFonts.openSans(
                 fontSize: 81, fontWeight: FontWeight.w300, letterSpacing: -1.5),

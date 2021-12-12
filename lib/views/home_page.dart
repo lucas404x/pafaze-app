@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:pafaze/services/storage_service.dart';
 import 'package:pafaze/viewmodels/home_viewmodel.dart';
 import 'package:pafaze/views/add_task_page.dart';
+import 'package:pafaze/views/edit_task_page.dart';
 import 'package:pafaze/widgets/background_text.dart';
 import 'package:pafaze/widgets/task_card.dart';
 import 'package:pafaze/widgets/user_profile.dart';
@@ -47,14 +48,8 @@ class HomePage extends StatelessWidget {
                         ],
                       ))),
               floatingActionButton: FloatingActionButton(
-                  onPressed: () async {
-                    var shouldRetriveTasksAgain = await Navigator.of(context)
-                        .pushNamed(AddTaskPage.route);
-
-                    if (shouldRetriveTasksAgain != null) {
-                      viewModel.updateTasks();
-                    }
-                  },
+                  onPressed: () => viewModel.openPageAndUpdateTasksWhenComeBack(
+                      context, AddTaskPage.route, null),
                   backgroundColor: Theme.of(context).primaryColor,
                   child: const Icon(Icons.add)),
             ));
@@ -88,9 +83,15 @@ _returnListViewWithTasks(HomeViewModel viewModel) {
   return ListView.builder(
       itemCount: viewModel.tasks.length,
       itemBuilder: (context, index) {
+        String taskId = viewModel.tasks[index].task.id;
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 16.0),
-          child: GestureDetector(
+          child: InkWell(
+            borderRadius: BorderRadius.circular(20),
+            onLongPress: () {
+              viewModel.openPageAndUpdateTasksWhenComeBack(
+                  context, EditTaskPage.route, taskId);
+            },
             onTap: () => viewModel.switchExpandState(index),
             child: TaskCard(
               listTask: viewModel.tasks[index],
