@@ -50,6 +50,7 @@ class MyApp extends StatelessWidget {
       },
       theme: ThemeData(
           primaryColor: Colors.black,
+          scaffoldBackgroundColor: const Color(0xFFF9F9F9),
           textTheme: TextTheme(
             headline1: GoogleFonts.openSans(
                 fontSize: 81, fontWeight: FontWeight.w300, letterSpacing: -1.5),
