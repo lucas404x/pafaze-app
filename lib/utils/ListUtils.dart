@@ -9,9 +9,9 @@ class ListUtils {
     if (!t1.task.isToDelivery && !t2.task.isToDelivery) {
       return 0;
     } else if (t1.task.isToDelivery && !t2.task.isToDelivery) {
-      return 1;
-    } else if (!t1.task.isToDelivery && t2.task.isToDelivery) {
       return -1;
+    } else if (!t1.task.isToDelivery && t2.task.isToDelivery) {
+      return 1;
     }
 
     return t1.task.dateToDelivery.compareTo(t2.task.dateToDelivery);
