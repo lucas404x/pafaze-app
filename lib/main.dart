@@ -1,15 +1,16 @@
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-import 'package:pafaze/views/edit_task_page.dart';
 
 import 'data/models/task_model.dart';
 import 'data/repositories/hive_repository.dart';
 import 'services/storage_service.dart';
 import 'views/add_task_page.dart';
+import 'views/edit_task_page.dart';
 import 'views/home_page.dart';
 
 final getIt = GetIt.instance;
@@ -20,6 +21,11 @@ void main() async {
 }
 
 setup() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // setup AlarmManager
+  await AndroidAlarmManager.initialize();
+
   // setup hive
   await Hive.initFlutter();
   Hive.registerAdapter(TaskModelAdapter());
