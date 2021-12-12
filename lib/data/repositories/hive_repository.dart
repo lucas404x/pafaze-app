@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 
 import '../interfaces/repository_interface.dart';
 
-class HiveRepository<T> implements IRepository {
+class HiveRepository<T> implements IRepository<T> {
   late final Box<T> _box;
 
   HiveRepository(this._box);
@@ -18,7 +18,7 @@ class HiveRepository<T> implements IRepository {
   }
 
   @override
-  Future<bool> addAsync(data) async {
+  Future<bool> addAsync(T data) async {
     await _box.add(data);
     return true;
   }

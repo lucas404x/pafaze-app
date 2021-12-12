@@ -10,4 +10,8 @@ class StorageService {
   Future<List<TaskModel>> getTasks() async {
     return await _hiveRepository.getAllAsync();
   }
+
+  Future<bool> registerTask(TaskModel task) async {
+    return _hiveRepository.addAsync(task);
+  }
 }
