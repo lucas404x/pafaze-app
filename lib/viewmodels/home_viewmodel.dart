@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:pafaze/data/enumerators/enum_task_sort_mode.dart';
 import 'package:pafaze/data/models/list_task_model.dart';
 import 'package:pafaze/services/storage_service.dart';
@@ -50,6 +50,16 @@ class HomeViewModel extends ChangeNotifier {
 
     _cachedMode = mode;
     notifyListeners();
+  }
+
+  void openPageAndUpdateTasksWhenComeBack(
+      BuildContext context, String route, Object? arguments) async {
+    var shouldRetriveTasksAgain =
+        await Navigator.of(context).pushNamed(route, arguments: arguments);
+
+    if (shouldRetriveTasksAgain != null) {
+      updateTasks();
+    }
   }
 
   void switchExpandState(int taskPosition) {
