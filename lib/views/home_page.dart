@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:pafaze/data/models/task_model.dart';
 import 'package:pafaze/services/storage_service.dart';
 import 'package:pafaze/viewmodels/home_viewmodel.dart';
 import 'package:pafaze/views/add_task_page.dart';
 import 'package:pafaze/widgets/background_text.dart';
+import 'package:pafaze/widgets/task_card.dart';
 import 'package:pafaze/widgets/user_profile.dart';
 import 'package:stacked/stacked.dart';
 import '../data/enumerators/enum_task_sort_mode.dart';
@@ -87,7 +87,17 @@ _returnPopupMenu(HomeViewModel viewModel) {
 _returnListViewWithTasks(HomeViewModel viewModel) {
   return ListView.builder(
       itemCount: viewModel.tasks.length,
-      itemBuilder: (context, index) => Center(
-            child: Text(viewModel.tasks[index].title),
-          ));
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16.0),
+          child: InkWell(
+            onTap: () => viewModel.switchExpandState(index),
+            child: TaskCard(
+              listTask: viewModel.tasks[index],
+              onTaskDone: viewModel.onTaskDone,
+              onTaskRemove: viewModel.onTaskRemove,
+            ),
+          ),
+        );
+      });
 }
