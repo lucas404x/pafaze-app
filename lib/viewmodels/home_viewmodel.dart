@@ -57,9 +57,13 @@ class HomeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onTaskDone(ListTaskModel task) {}
+  void onTaskDone(ListTaskModel listTask) {}
 
-  void onTaskEdit(ListTaskModel task) {}
+  void onTaskEdit(ListTaskModel listTask) {}
 
-  void onTaskRemove(ListTaskModel task) {}
+  void onTaskRemove(ListTaskModel listTask) async {
+    await _storageService.removeTask(listTask.task.id);
+    _tasks.remove(listTask);
+    notifyListeners();
+  }
 }
