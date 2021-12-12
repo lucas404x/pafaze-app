@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pafaze/data/models/add_task_model.dart';
 
+import '../data/models/add_task_model.dart';
 import '../data/models/task_model.dart';
 import '../services/storage_service.dart';
+import '../utils/DateTimeUtils.dart';
 
 class AddTaskViewModel extends ChangeNotifier {
   final StorageService _storageService;
@@ -47,7 +48,8 @@ class AddTaskViewModel extends ChangeNotifier {
       return 'Dados incorretos. Verifique os dados da tarefa e tente novamente.';
     }
 
-    if (!_isDeliveryDateValid() && _isToDeliveryTask) {
+    if (!DateTimeUtils.isDeliveryDateValid(_deliveryDate) &&
+        _isToDeliveryTask) {
       return 'O horário selecionado não é valído. Compare o horário atual do seu celular com o selecionado.';
     }
 
@@ -60,13 +62,5 @@ class AddTaskViewModel extends ChangeNotifier {
     await _storageService.registerTask(TaskModel.fromAddTaskModel(model));
 
     return null;
-  }
-
-  bool _isDeliveryDateValid() {
-    if (_deliveryDate == null) {
-      return false;
-    }
-
-    return _deliveryDate!.isAfter(DateTime.now());
   }
 }
