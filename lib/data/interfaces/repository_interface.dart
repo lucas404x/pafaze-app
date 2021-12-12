@@ -3,7 +3,7 @@ abstract class IRepository<T> {
 
   Future<T?> getAsync(String id);
 
-  Future<bool> addAsync(T data);
+  Future<bool> addAsync(String id, T data);
 
   Future<bool> deleteAsync(String id);
 

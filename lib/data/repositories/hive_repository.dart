@@ -18,8 +18,8 @@ class HiveRepository<T> implements IRepository<T> {
   }
 
   @override
-  Future<bool> addAsync(T data) async {
-    await _box.add(data);
+  Future<bool> addAsync(String id, T data) async {
+    await _box.put(id, data);
     return true;
   }
 
