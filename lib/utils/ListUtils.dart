@@ -1,27 +1,27 @@
-import '../data/models/task_model.dart';
+import '../data/models/list_task_model.dart';
 
 class ListUtils {
-  static int compareByDateCreated(TaskModel t1, TaskModel t2) {
-    return t1.dateCreated.compareTo(t2.dateCreated);
+  static int compareByDateCreated(ListTaskModel t1, ListTaskModel t2) {
+    return t1.task.dateCreated.compareTo(t2.task.dateCreated);
   }
 
-  static int compareByDateToDelivery(TaskModel t1, TaskModel t2) {
-    if (!t1.isToDelivery && !t2.isToDelivery) {
+  static int compareByDateToDelivery(ListTaskModel t1, ListTaskModel t2) {
+    if (!t1.task.isToDelivery && !t2.task.isToDelivery) {
       return 0;
-    } else if (t1.isToDelivery && !t2.isToDelivery) {
+    } else if (t1.task.isToDelivery && !t2.task.isToDelivery) {
       return 1;
-    } else if (!t1.isToDelivery && t2.isToDelivery) {
+    } else if (!t1.task.isToDelivery && t2.task.isToDelivery) {
       return -1;
     }
 
-    return t1.dateToDelivery.compareTo(t2.dateToDelivery);
+    return t1.task.dateToDelivery.compareTo(t2.task.dateToDelivery);
   }
 
-  static int compareByTitleAZ(TaskModel t1, TaskModel t2) {
-    return t1.title.compareTo(t2.title);
+  static int compareByTitleAZ(ListTaskModel t1, ListTaskModel t2) {
+    return t1.task.title.compareTo(t2.task.title);
   }
 
-  static int compareByTitleZA(TaskModel t1, TaskModel t2) {
-    return t2.title.compareTo(t1.title);
+  static int compareByTitleZA(ListTaskModel t1, ListTaskModel t2) {
+    return t2.task.title.compareTo(t1.task.title);
   }
 }
