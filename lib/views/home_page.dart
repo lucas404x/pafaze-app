@@ -31,27 +31,8 @@ class HomePage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               const UserProfile(
-                                  image: "assets/images/default_avatar.png"),
-                              PopupMenuButton<TaskSortMode>(
-                                  itemBuilder: (context) =>
-                                      <PopupMenuEntry<TaskSortMode>>[
-                                        const PopupMenuItem<TaskSortMode>(
-                                          value: TaskSortMode.dateCreated,
-                                          child: Text("Data de criação"),
-                                        ),
-                                        const PopupMenuItem<TaskSortMode>(
-                                          value: TaskSortMode.dateToDelivery,
-                                          child: Text("Data de entrega"),
-                                        ),
-                                        const PopupMenuItem<TaskSortMode>(
-                                          value: TaskSortMode.ascendingTitle,
-                                          child: Text("A-Z"),
-                                        ),
-                                        const PopupMenuItem<TaskSortMode>(
-                                          value: TaskSortMode.descendingTitle,
-                                          child: Text("Z-A"),
-                                        )
-                                      ])
+                                  image: 'assets/images/default_avatar.png'),
+                              _returnPopupMenu(viewModel),
                             ],
                           ),
                           Expanded(
@@ -60,14 +41,9 @@ class HomePage extends StatelessWidget {
                                       alignment: Alignment.center,
                                       child: BackgroundText(
                                           text:
-                                              "Você não possuí nenhuma tarefa cadastrada."),
+                                              'Você não possuí nenhuma tarefa cadastrada.'),
                                     )
-                                  : ListView.builder(
-                                      itemCount: viewModel.tasks.length,
-                                      itemBuilder: (context, index) => Center(
-                                            child: Text(
-                                                viewModel.tasks[index].title),
-                                          )))
+                                  : _returnListViewWithTasks(viewModel))
                         ],
                       ))),
               floatingActionButton: FloatingActionButton(
@@ -83,4 +59,35 @@ class HomePage extends StatelessWidget {
                   child: const Icon(Icons.add)),
             ));
   }
+}
+
+_returnPopupMenu(HomeViewModel viewModel) {
+  return PopupMenuButton<TaskSortMode>(
+      onSelected: viewModel.sortTasks,
+      itemBuilder: (context) => <PopupMenuEntry<TaskSortMode>>[
+            const PopupMenuItem<TaskSortMode>(
+              value: TaskSortMode.dateCreated,
+              child: Text('Data de criação'),
+            ),
+            const PopupMenuItem<TaskSortMode>(
+              value: TaskSortMode.dateToDelivery,
+              child: Text('Data de entrega'),
+            ),
+            const PopupMenuItem<TaskSortMode>(
+              value: TaskSortMode.ascendingTitle,
+              child: Text('A-Z'),
+            ),
+            const PopupMenuItem<TaskSortMode>(
+              value: TaskSortMode.descendingTitle,
+              child: Text('Z-A'),
+            )
+          ]);
+}
+
+_returnListViewWithTasks(HomeViewModel viewModel) {
+  return ListView.builder(
+      itemCount: viewModel.tasks.length,
+      itemBuilder: (context, index) => Center(
+            child: Text(viewModel.tasks[index].title),
+          ));
 }
