@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:get_it/get_it.dart';
 import 'package:stacked/stacked.dart';
 
+import '../services/storage_service.dart';
 import '../utils/DateTimeUtils.dart';
 import '../viewmodels/add_task_viewmodel.dart';
 
@@ -13,7 +15,7 @@ class AddTaskPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<AddTaskViewModel>.reactive(
-        viewModelBuilder: () => AddTaskViewModel(),
+        viewModelBuilder: () => AddTaskViewModel(GetIt.I.get<StorageService>()),
         builder: (context, viewModel, child) => Scaffold(
               body: SafeArea(
                   child: SingleChildScrollView(
@@ -104,8 +106,17 @@ class AddTaskPage extends StatelessWidget {
                                   elevation: MaterialStateProperty.all(0),
                                   backgroundColor: MaterialStateProperty.all(
                                       Theme.of(context).primaryColor)),
-                              onPressed: () {
-                                viewModel.validateAndUploadTask();
+                              onPressed: () async {
+                                String? result =
+                                    await viewModel.validateAndUploadTask();
+                                if (result == null) {
+                                  Navigator.of(context).pop(true);
+                                  return;
+                                }
+
+                                var snackBar = SnackBar(content: Text(result));
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBar);
                               },
                               child: const Text(
                                 'Criar tarefa',

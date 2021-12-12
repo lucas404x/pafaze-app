@@ -71,8 +71,14 @@ class HomePage extends StatelessWidget {
                         ],
                       ))),
               floatingActionButton: FloatingActionButton(
-                  onPressed: () => Navigator.of(context)
-                      .pushNamed(AddTaskPage.route, arguments: TaskModel()),
+                  onPressed: () async {
+                    var shouldRetriveTasksAgain = await Navigator.of(context)
+                        .pushNamed(AddTaskPage.route);
+
+                    if (shouldRetriveTasksAgain != null) {
+                      viewModel.updateTasks();
+                    }
+                  },
                   backgroundColor: Theme.of(context).primaryColor,
                   child: const Icon(Icons.add)),
             ));
