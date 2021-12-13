@@ -5,6 +5,10 @@ class DateTimeUtils {
     return DateFormat().format(date ?? DateTime.now());
   }
 
+  static String formatDateToShort(DateTime? date) {
+    return DateFormat.yMd().format(date ?? DateTime.now());
+  }
+
   static bool isDeliveryDateValid(DateTime? date) {
     if (date == null) {
       return false;
