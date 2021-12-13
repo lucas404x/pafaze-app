@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:pafaze/data/enumerators/enum_task_delivery_state.dart';
-import '../data/models/task_model.dart';
+import 'package:pafaze/data/models/pinned_card_model.dart';
 
+import '../data/enumerators/enum_task_delivery_state.dart';
 import '../data/enumerators/enum_task_sort_mode.dart';
 import '../data/models/list_task_model.dart';
+import '../data/models/task_model.dart';
 import '../services/task_service.dart';
 import '../utils/ListUtils.dart';
 
 class HomeViewModel extends ChangeNotifier {
   final TaskService _taskService;
+
   List<ListTaskModel> _tasks = List.empty(growable: true);
   List<ListTaskModel> get tasks => _tasks;
+
+  final PinnedCardModel _pinnedCard = PinnedCardModel();
+  PinnedCardModel get pinnedCard => _pinnedCard;
 
   TaskSortMode _cachedMode = TaskSortMode.dateCreated;
 

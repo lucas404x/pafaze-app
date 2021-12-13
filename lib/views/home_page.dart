@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pafaze/widgets/pinned_card.dart';
 import 'package:stacked/stacked.dart';
 
 import '../data/enumerators/enum_task_sort_mode.dart';
@@ -37,6 +38,25 @@ class HomePage extends StatelessWidget {
                               _returnPopupMenu(viewModel),
                             ],
                           ),
+                          const SizedBox(
+                            height: 32,
+                          ),
+                          viewModel.tasks.isNotEmpty
+                              ? Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    PinnedCard(
+                                      pinnedCardModel: viewModel.pinnedCard,
+                                    ),
+                                    const Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 16),
+                                      child: Divider(),
+                                    ),
+                                  ],
+                                )
+                              : Container(),
                           Expanded(
                               child: viewModel.tasks.isEmpty
                                   ? const Align(
@@ -45,7 +65,7 @@ class HomePage extends StatelessWidget {
                                           text:
                                               'Você não possuí nenhuma tarefa cadastrada.'),
                                     )
-                                  : _returnListViewWithTasks(viewModel))
+                                  : _returnListViewWithTasks(viewModel)),
                         ],
                       ))),
               floatingActionButton: FloatingActionButton(
