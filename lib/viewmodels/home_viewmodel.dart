@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pafaze/data/enumerators/enum_task_delivery_state.dart';
+import '../data/models/task_model.dart';
 
 import '../data/enumerators/enum_task_sort_mode.dart';
 import '../data/models/list_task_model.dart';
@@ -8,7 +10,6 @@ import '../utils/ListUtils.dart';
 class HomeViewModel extends ChangeNotifier {
   final TaskService _taskService;
   List<ListTaskModel> _tasks = List.empty(growable: true);
-
   List<ListTaskModel> get tasks => _tasks;
 
   TaskSortMode _cachedMode = TaskSortMode.dateCreated;
@@ -17,7 +18,7 @@ class HomeViewModel extends ChangeNotifier {
 
   void updateTasks() async {
     _tasks = await _taskService.getTasks();
-    _tasks.sort(ListUtils.compareByDateCreated);
+    sortTasks(TaskSortMode.dateCreated);
     notifyListeners();
   }
 
@@ -60,9 +61,14 @@ class HomeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onTaskDone(ListTaskModel listTask) {}
+  bool canEditTask(TaskModel task) =>
+      !task.isDone && task.taskDeliveryState != TaskDeliveryState.deliveryLate;
 
-  void onTaskEdit(ListTaskModel listTask) {}
+  void onTaskDone(ListTaskModel listTask) async {
+    if (await _taskService.markTaskAsDone(listTask.task)) {
+      notifyListeners();
+    }
+  }
 
   void onTaskRemove(ListTaskModel listTask) async {
     await _taskService.removeTask(listTask.task.id);

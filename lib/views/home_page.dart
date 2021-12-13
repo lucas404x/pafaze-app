@@ -90,6 +90,14 @@ _returnListViewWithTasks(HomeViewModel viewModel) {
           child: InkWell(
             borderRadius: BorderRadius.circular(20),
             onLongPress: () {
+              if (!viewModel.canEditTask(viewModel.tasks[index].task)) {
+                var snackBar = const SnackBar(
+                    content: Text(
+                        'Você não pode editar uma tarefa atrasada ou concluída'));
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                return;
+              }
+
               viewModel.openPageAndUpdateTasksWhenComeBack(
                   context, EditTaskPage.route, taskId);
             },
