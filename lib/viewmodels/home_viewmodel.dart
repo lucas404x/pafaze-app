@@ -1,24 +1,38 @@
 import 'package:flutter/material.dart';
+import '../const/colors.dart';
 
-import '../data/enumerators/enum_task_delivery_state.dart';
 import '../data/enumerators/enum_task_sort_mode.dart';
 import '../data/models/list_task_model.dart';
 import '../data/models/pinned_card_model.dart';
-import '../data/models/task_model.dart';
 import '../services/task_service.dart';
 import '../utils/ListUtils.dart';
 
 class HomeViewModel extends ChangeNotifier {
-  final TaskService _taskService;
+  final String _enableTaskDoneTxt =
+      'Clique aqui para exibir tarefas concluidas';
+  final String _disableTaskDoneTxt = 'Ocultar tarefas concluídas';
 
-  final List<ListTaskModel> _tasks = List.empty(growable: true);
-  List<ListTaskModel> get tasks => _tasks;
+  Color get labelBgColor => _showTasksDone
+      ? ColorsApp.disableTaskDoneBgColor
+      : ColorsApp.enableTaskDoneBgColor;
+
+  Color get labelTxtColor => _showTasksDone
+      ? ColorsApp.disableTaskDoneTxtColor
+      : ColorsApp.enableTaskDoneTxtColor;
+
+  String get labelTxt =>
+      _showTasksDone ? _disableTaskDoneTxt : _enableTaskDoneTxt;
+
+  bool _showTasksDone = false;
+  bool get showTasksDone => _showTasksDone;
 
   int _tasksDoneQuantity = 0;
   bool get taskDoneExist => _tasksDoneQuantity > 0;
 
-  bool _showTasksDone = false;
-  bool get showTasksDone => _showTasksDone;
+  final TaskService _taskService;
+
+  final List<ListTaskModel> _tasks = List.empty(growable: true);
+  List<ListTaskModel> get tasks => _tasks;
 
   final List<ListTaskModel> _tasksLate = List.empty(growable: true);
   List<ListTaskModel> get tasksLate => _tasksLate;
@@ -87,8 +101,12 @@ class HomeViewModel extends ChangeNotifier {
     }
   }
 
-  void switchShowDoneTasksState() {
+  void switchAllowTaskDoneState() {
     _showTasksDone = !_showTasksDone;
+
+    if (_showTasksDone) {
+    } else {}
+
     notifyListeners();
   }
 
@@ -96,9 +114,6 @@ class HomeViewModel extends ChangeNotifier {
     _tasks[taskPosition].expand = !_tasks[taskPosition].expand;
     notifyListeners();
   }
-
-  bool canEditTask(TaskModel task) =>
-      !task.isDone && task.taskDeliveryState != TaskDeliveryState.deliveryLate;
 
   void onTaskDone(ListTaskModel listTask) async {
     if (await _taskService.markTaskAsDone(listTask.task)) {

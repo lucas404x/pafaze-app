@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import '../widgets/show_done_tasks_button.dart';
-import '../widgets/pinned_card.dart';
 import 'package:stacked/stacked.dart';
 
 import '../data/enumerators/enum_task_sort_mode.dart';
 import '../services/task_service.dart';
 import '../viewmodels/home_viewmodel.dart';
 import '../widgets/background_text.dart';
+import '../widgets/label_button.dart';
+import '../widgets/pinned_card.dart';
 import '../widgets/task_card.dart';
-import '../widgets/user_profile.dart';
 import 'add_task_page.dart';
 import 'edit_task_page.dart';
 
@@ -51,10 +50,13 @@ class HomePage extends StatelessWidget {
                                       height: 8,
                                     ),
                                     viewModel.taskDoneExist
-                                        ? ShowDoneTasksButton(
-                                            show: viewModel.showTasksDone,
+                                        ? LabelButton(
+                                            backgroudColor:
+                                                viewModel.labelBgColor,
+                                            textColor: viewModel.labelTxtColor,
+                                            text: viewModel.labelTxt,
                                             onTap: viewModel
-                                                .switchShowDoneTasksState,
+                                                .switchAllowTaskDoneState,
                                           )
                                         : Container(),
                                     const Padding(
@@ -121,18 +123,8 @@ _returnListViewWithTasks(HomeViewModel viewModel) {
           padding: const EdgeInsets.symmetric(vertical: 16.0),
           child: InkWell(
             borderRadius: BorderRadius.circular(20),
-            onLongPress: () {
-              if (!viewModel.canEditTask(_task)) {
-                var snackBar = const SnackBar(
-                    content: Text(
-                        'Você não pode editar uma tarefa atrasada ou concluída'));
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                return;
-              }
-
-              viewModel.openPageAndUpdateTasksWhenComeBack(
-                  context, EditTaskPage.route, _task.id);
-            },
+            onLongPress: () => viewModel.openPageAndUpdateTasksWhenComeBack(
+                context, EditTaskPage.route, _task.id),
             onTap: () => viewModel.switchExpandState(index),
             child: TaskCard(
               listTask: viewModel.tasks[index],

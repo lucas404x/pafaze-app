@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 
-class ShowDoneTasksButton extends StatelessWidget {
-  final bool show;
+class LabelButton extends StatelessWidget {
   final Function onTap;
-  const ShowDoneTasksButton({Key? key, required this.show, required this.onTap})
+  final Color backgroudColor;
+  final Color textColor;
+  final String text;
+  const LabelButton(
+      {Key? key,
+      required this.onTap,
+      required this.backgroudColor,
+      required this.textColor,
+      required this.text})
       : super(key: key);
 
   @override
@@ -20,16 +27,12 @@ class ShowDoneTasksButton extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color: Color(show ? 0xFFFFDCDC : 0xFFDCF4FF),
+                  color: backgroudColor,
                 ),
                 child: Text(
-                  show
-                      ? 'Ocultar tarefas concluídas'
-                      : 'Clique aqui para exibir tarefas concluidas',
+                  text,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 10,
-                      color: Color(show ? 0xFFC80000 : 0xFF0089C8)),
+                  style: TextStyle(fontSize: 10, color: textColor),
                 ),
               )
             ],
