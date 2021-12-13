@@ -21,13 +21,12 @@ class TaskService {
     var tasks = await _storageService.getTasks();
     return tasks
         .where((task) => !DateTimeUtils.isDeliveryDateLate(task))
-        .map((task) => ListTaskModel(task, !task.isDone, false))
+        .map((task) => ListTaskModel(task, false))
         .toList(growable: true);
   }
 
-  Future<List<ListTaskModel>> getOnlyDoneTasks(
-      List<ListTaskModel> listTasks) async {
-    return listTasks.where((listTask) => listTask.task.isDone).toList();
+  Future<int> getDoneTasksQuantity(List<ListTaskModel> listTasks) async {
+    return listTasks.where((listTask) => listTask.task.isDone).length;
   }
 
   Future<List<ListTaskModel>> getOnlyLateTasks(

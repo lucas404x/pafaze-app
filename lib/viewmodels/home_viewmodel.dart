@@ -14,8 +14,7 @@ class HomeViewModel extends ChangeNotifier {
   final List<ListTaskModel> _tasks = List.empty(growable: true);
   List<ListTaskModel> get tasks => _tasks;
 
-  final List<ListTaskModel> _tasksDone = List.empty(growable: true);
-  List<ListTaskModel> get tasksDone => _tasksDone;
+  int _tasksDoneQuantity = 0;
 
   final List<ListTaskModel> _tasksLate = List.empty(growable: true);
   List<ListTaskModel> get tasksLate => _tasksLate;
@@ -29,7 +28,7 @@ class HomeViewModel extends ChangeNotifier {
 
   void updateTasks() async {
     _tasks.addAll(await _taskService.getTasks());
-    _tasksDone.addAll(await _taskService.getOnlyDoneTasks(_tasks));
+    _tasksDoneQuantity = await _taskService.getDoneTasksQuantity(_tasks);
     _tasksLate.addAll(await _taskService.getOnlyLateTasks(_tasks));
     _updatePinnedCard();
     sortTasks(TaskSortMode.dateCreated);
@@ -37,18 +36,17 @@ class HomeViewModel extends ChangeNotifier {
   }
 
   void _updatePinnedCard() {
-    var taskDonePercent =
-        _calculateTasksDonePercent(_tasks.length, _tasksDone.length);
-    _pinnedCard.tasksDonePercent = taskDonePercent;
-    _pinnedCard.progressValue = taskDonePercent / 100;
-    _pinnedCard.totalTasksQuantity = _tasks.length;
-    _pinnedCard.tasksDoneQuantity = _tasksDone.length;
-
-    notifyListeners();
+    if (_tasks.isNotEmpty) {
+      var taskDonePercent = _calculateTasksDonePercent();
+      _pinnedCard.tasksDonePercent = taskDonePercent;
+      _pinnedCard.progressValue = taskDonePercent / 100;
+      _pinnedCard.totalTasksQuantity = _tasks.length;
+      _pinnedCard.tasksDoneQuantity = _tasksDoneQuantity;
+    }
   }
 
-  int _calculateTasksDonePercent(int totalTasks, int tasksDone) {
-    return (tasksDone * 100) ~/ totalTasks;
+  int _calculateTasksDonePercent() {
+    return _tasksDoneQuantity * 100 ~/ _tasks.length;
   }
 
   void sortTasks(TaskSortMode mode) {
@@ -95,11 +93,10 @@ class HomeViewModel extends ChangeNotifier {
 
   void onTaskDone(ListTaskModel listTask) async {
     if (await _taskService.markTaskAsDone(listTask.task)) {
-      int listTaskIndex = _tasks.indexOf(listTask);
-      if (listTaskIndex != -1) {
-        _tasksDone.add(listTask);
-        _updatePinnedCard();
-      }
+      listTask.task.isDone = true;
+      _tasksDoneQuantity++;
+      _updatePinnedCard();
+      notifyListeners();
     }
   }
 
