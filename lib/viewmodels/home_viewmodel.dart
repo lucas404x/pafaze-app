@@ -1,31 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:pafaze/data/enumerators/enum_task_sort_mode.dart';
-import 'package:pafaze/data/models/list_task_model.dart';
-import 'package:pafaze/services/storage_service.dart';
-import 'package:pafaze/utils/ListUtils.dart';
-import '../data/models/task_model.dart';
+
+import '../data/enumerators/enum_task_sort_mode.dart';
+import '../data/models/list_task_model.dart';
+import '../services/task_service.dart';
+import '../utils/ListUtils.dart';
 
 class HomeViewModel extends ChangeNotifier {
-  final StorageService _storageService;
+  final TaskService _taskService;
   List<ListTaskModel> _tasks = List.empty(growable: true);
 
   List<ListTaskModel> get tasks => _tasks;
 
   TaskSortMode _cachedMode = TaskSortMode.dateCreated;
 
-  HomeViewModel(this._storageService);
+  HomeViewModel(this._taskService);
 
   void updateTasks() async {
-    var storageTasks = await _storageService.getTasks();
-    _tasks = _convertFromTaskToListTask(storageTasks);
+    _tasks = await _taskService.getTasks();
     _tasks.sort(ListUtils.compareByDateCreated);
     notifyListeners();
-  }
-
-  List<ListTaskModel> _convertFromTaskToListTask(List<TaskModel> tasks) {
-    return tasks
-        .map((task) => ListTaskModel(task, false))
-        .toList(growable: true);
   }
 
   void sortTasks(TaskSortMode mode) {
@@ -72,7 +65,7 @@ class HomeViewModel extends ChangeNotifier {
   void onTaskEdit(ListTaskModel listTask) {}
 
   void onTaskRemove(ListTaskModel listTask) async {
-    await _storageService.removeTask(listTask.task.id);
+    await _taskService.removeTask(listTask.task.id);
     _tasks.remove(listTask);
     notifyListeners();
   }

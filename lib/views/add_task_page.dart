@@ -3,7 +3,7 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:stacked/stacked.dart';
 
-import '../services/storage_service.dart';
+import '../services/task_service.dart';
 import '../utils/DateTimeUtils.dart';
 import '../viewmodels/add_task_viewmodel.dart';
 
@@ -15,7 +15,7 @@ class AddTaskPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<AddTaskViewModel>.reactive(
-        viewModelBuilder: () => AddTaskViewModel(GetIt.I.get<StorageService>()),
+        viewModelBuilder: () => AddTaskViewModel(GetIt.I.get<TaskService>()),
         builder: (context, viewModel, child) => Scaffold(
               body: SafeArea(
                   child: SingleChildScrollView(
@@ -85,7 +85,7 @@ class AddTaskPage extends StatelessWidget {
                                               context,
                                               locale: LocaleType.pt,
                                               minTime: DateTime.now().add(
-                                                  const Duration(minutes: 10)),
+                                                  const Duration(seconds: 10)),
                                               onConfirm:
                                                   viewModel.updateDeliveryDate,
                                             ),

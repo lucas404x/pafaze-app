@@ -1,3 +1,5 @@
+import 'dart:isolate';
+
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -5,6 +7,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:pafaze/data/enumerators/enum_task_delivery_state.dart';
+import 'package:pafaze/data/models/alarm_model.dart';
+import 'package:pafaze/services/alarm_service.dart';
+import 'package:pafaze/services/task_service.dart';
 
 import 'data/models/task_model.dart';
 import 'data/repositories/hive_repository.dart';
@@ -26,20 +32,31 @@ setup() async {
   // setup AlarmManager
   await AndroidAlarmManager.initialize();
 
-  // setup hive
-  await Hive.initFlutter();
-  Hive.registerAdapter(TaskModelAdapter());
-
-  // setup repositories
-  var taskBox = await Hive.openBox<TaskModel>('task');
-
-  // setup services
-  var hiveRepository = HiveRepository<TaskModel>(taskBox);
-  getIt.registerSingleton<StorageService>(StorageService(hiveRepository));
-
   // setup app locale
   await initializeDateFormatting('pt_BR', null);
   Intl.defaultLocale = 'pt_BR';
+
+  // setup hive
+  await Hive.initFlutter();
+  Hive.registerAdapter(TaskModelAdapter());
+  Hive.registerAdapter(AlarmModelAdapter());
+  Hive.registerAdapter(TaskDeliveryStateAdapter());
+
+  // setup repositories
+  var taskBox = await Hive.openBox<TaskModel>('task');
+  var alarmBox = await Hive.openBox<AlarmModel>('alarm');
+
+  // setup repositories
+  var taskLocalSource = HiveRepository<TaskModel>(taskBox);
+  var alarmLocalSource = HiveRepository<AlarmModel>(alarmBox);
+
+  // setup services
+  var storageService = StorageService(taskLocalSource, alarmLocalSource);
+  var alarmService = AlarmManagerService();
+  var taskService = TaskService(storageService, alarmService);
+
+  // register services in get_it
+  getIt.registerSingleton<TaskService>(taskService);
 }
 
 class MyApp extends StatelessWidget {

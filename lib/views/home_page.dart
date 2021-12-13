@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:pafaze/services/storage_service.dart';
-import 'package:pafaze/viewmodels/home_viewmodel.dart';
-import 'package:pafaze/views/add_task_page.dart';
-import 'package:pafaze/views/edit_task_page.dart';
-import 'package:pafaze/widgets/background_text.dart';
-import 'package:pafaze/widgets/task_card.dart';
-import 'package:pafaze/widgets/user_profile.dart';
 import 'package:stacked/stacked.dart';
+
 import '../data/enumerators/enum_task_sort_mode.dart';
+import '../services/task_service.dart';
+import '../viewmodels/home_viewmodel.dart';
+import '../widgets/background_text.dart';
+import '../widgets/task_card.dart';
+import '../widgets/user_profile.dart';
+import 'add_task_page.dart';
+import 'edit_task_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
-        viewModelBuilder: () => HomeViewModel(GetIt.I.get<StorageService>()),
+        viewModelBuilder: () => HomeViewModel(GetIt.I.get<TaskService>()),
         onModelReady: (viewModel) => viewModel.updateTasks(),
         builder: (context, viewModel, child) => Scaffold(
               body: SafeArea(

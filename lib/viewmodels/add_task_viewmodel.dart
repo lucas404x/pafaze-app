@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../data/enumerators/enum_task_delivery_state.dart';
 import '../data/models/add_task_model.dart';
 import '../data/models/task_model.dart';
-import '../services/storage_service.dart';
+import '../services/task_service.dart';
 import '../utils/DateTimeUtils.dart';
 
 class AddTaskViewModel extends ChangeNotifier {
-  final StorageService _storageService;
+  final TaskService _taskService;
 
   final _formKey = GlobalKey<FormState>();
   GlobalKey<FormState> get formKey => _formKey;
@@ -23,7 +24,7 @@ class AddTaskViewModel extends ChangeNotifier {
   DateTime? _deliveryDate;
   DateTime? get deliveryDate => _deliveryDate;
 
-  AddTaskViewModel(this._storageService);
+  AddTaskViewModel(this._taskService);
 
   String? titleValidator(String? title) {
     if (title == null || title.trim().isEmpty) {
@@ -57,9 +58,11 @@ class AddTaskViewModel extends ChangeNotifier {
         title: _titleController.text,
         description: _descriptionController.text,
         dateToDelivery: _deliveryDate?.toUtc() ?? DateTime.now().toUtc(),
-        isToDelivery: _isToDeliveryTask);
+        deliveryState: _isToDeliveryTask
+            ? TaskDeliveryState.delivery
+            : TaskDeliveryState.notDelivery);
 
-    await _storageService.registerTask(TaskModel.fromAddTaskModel(model));
+    await _taskService.registerTask(TaskModel.fromAddTaskModel(model));
 
     return null;
   }

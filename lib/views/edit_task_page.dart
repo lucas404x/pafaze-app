@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get_it/get_it.dart';
-import 'package:pafaze/widgets/background_text.dart';
 import 'package:stacked/stacked.dart';
 
-import '../services/storage_service.dart';
+import '../services/task_service.dart';
 import '../utils/DateTimeUtils.dart';
 import '../viewmodels/edit_task_viewmodel.dart';
+import '../widgets/background_text.dart';
 
 class EditTaskPage extends StatelessWidget {
   const EditTaskPage({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ class EditTaskPage extends StatelessWidget {
     String taskId = ModalRoute.of(context)!.settings.arguments as String;
     return ViewModelBuilder<EditTaskViewModel>.reactive(
         viewModelBuilder: () =>
-            EditTaskViewModel(taskId, GetIt.I.get<StorageService>()),
+            EditTaskViewModel(taskId, GetIt.I.get<TaskService>()),
         onModelReady: (model) => model.setup(),
         builder: (context, viewModel, child) => Scaffold(
               body: viewModel.hasError

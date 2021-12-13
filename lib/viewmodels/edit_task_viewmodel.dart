@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:pafaze/utils/DateTimeUtils.dart';
+
+import '../data/enumerators/enum_task_delivery_state.dart';
 import '../data/models/task_model.dart';
-import '../services/storage_service.dart';
+import '../services/task_service.dart';
+import '../utils/DateTimeUtils.dart';
 
 class EditTaskViewModel extends ChangeNotifier {
   final String _taskId;
 
-  final StorageService _storageService;
+  final TaskService _taskService;
 
   final _formKey = GlobalKey<FormState>();
   GlobalKey<FormState> get formKey => _formKey;
@@ -32,15 +34,17 @@ class EditTaskViewModel extends ChangeNotifier {
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
 
-  EditTaskViewModel(this._taskId, this._storageService);
+  EditTaskViewModel(this._taskId, this._taskService);
 
   void setup() async {
-    TaskModel? task = await _storageService.getTask(_taskId);
+    TaskModel? task = await _taskService.getTask(_taskId);
     if (task != null) {
       _task = task;
       _titleController.text = _task.title;
       _descriptionController.text = _task.description;
-      _isToDeliveryTask = _task.isToDelivery;
+      _isToDeliveryTask =
+          _task.taskDeliveryState != TaskDeliveryState.notDelivery;
+
       if (_isToDeliveryTask) {
         var date = _task.dateToDelivery.toLocal();
         _deliveryDate = date;
@@ -83,10 +87,12 @@ class EditTaskViewModel extends ChangeNotifier {
 
     _task.title = _titleController.text;
     _task.description = _descriptionController.text;
-    _task.isToDelivery = _isToDeliveryTask;
+    _task.taskDeliveryState = _isToDeliveryTask
+        ? TaskDeliveryState.delivery
+        : TaskDeliveryState.notDelivery;
     _task.dateToDelivery = _deliveryDate?.toUtc() ?? DateTime.now().toUtc();
 
-    await _storageService.updateTask(_taskId, _task);
+    await _taskService.updateTask(_taskId, _task);
 
     return null;
   }
