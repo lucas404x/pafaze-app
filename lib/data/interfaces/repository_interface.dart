@@ -1,11 +1,11 @@
 abstract class IRepository<T> {
   Future<List<T>> getAllAsync();
 
-  Future<T?> getAsync(String id);
+  Future<T?> getAsync(id);
 
-  Future<bool> addAsync(String id, T data);
+  Future<bool> addAsync(id, T data);
 
-  Future<bool> deleteAsync(String id);
+  Future<bool> deleteAsync(id);
 
-  Future<bool> editAsync(String id, T data);
+  Future<bool> editAsync(id, T data);
 }

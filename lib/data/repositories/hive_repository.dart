@@ -13,24 +13,24 @@ class HiveRepository<T> implements IRepository<T> {
   }
 
   @override
-  Future<T?> getAsync(String id) async {
+  Future<T?> getAsync(id) async {
     return _box.get(id);
   }
 
   @override
-  Future<bool> addAsync(String id, T data) async {
+  Future<bool> addAsync(id, T data) async {
     await _box.put(id, data);
     return true;
   }
 
   @override
-  Future<bool> deleteAsync(String id) async {
+  Future<bool> deleteAsync(id) async {
     await _box.delete(id);
     return true;
   }
 
   @override
-  Future<bool> editAsync(String id, data) async {
+  Future<bool> editAsync(id, data) async {
     await _box.put(id, data);
     return true;
   }
