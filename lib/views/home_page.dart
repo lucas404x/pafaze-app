@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:pafaze/widgets/pinned_card.dart';
+import '../widgets/show_done_tasks_button.dart';
+import '../widgets/pinned_card.dart';
 import 'package:stacked/stacked.dart';
 
 import '../data/enumerators/enum_task_sort_mode.dart';
@@ -28,18 +29,15 @@ class HomePage extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 24, vertical: 16),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              const UserProfile(
-                                  image: 'assets/images/default_avatar.png'),
                               _returnPopupMenu(viewModel),
                             ],
                           ),
                           const SizedBox(
-                            height: 32,
+                            height: 24,
                           ),
                           viewModel.tasks.isNotEmpty
                               ? Column(
@@ -49,6 +47,16 @@ class HomePage extends StatelessWidget {
                                     PinnedCard(
                                       pinnedCardModel: viewModel.pinnedCard,
                                     ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    viewModel.taskDoneExist
+                                        ? ShowDoneTasksButton(
+                                            show: viewModel.showTasksDone,
+                                            onTap: viewModel
+                                                .switchShowDoneTasksState,
+                                          )
+                                        : Container(),
                                     const Padding(
                                       padding:
                                           EdgeInsets.symmetric(vertical: 16),
@@ -104,13 +112,17 @@ _returnListViewWithTasks(HomeViewModel viewModel) {
   return ListView.builder(
       itemCount: viewModel.tasks.length,
       itemBuilder: (context, index) {
-        String taskId = viewModel.tasks[index].task.id;
+        var _task = viewModel.tasks[index].task;
+        if (_task.isDone && !viewModel.showTasksDone) {
+          return Container();
+        }
+
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 16.0),
           child: InkWell(
             borderRadius: BorderRadius.circular(20),
             onLongPress: () {
-              if (!viewModel.canEditTask(viewModel.tasks[index].task)) {
+              if (!viewModel.canEditTask(_task)) {
                 var snackBar = const SnackBar(
                     content: Text(
                         'Você não pode editar uma tarefa atrasada ou concluída'));
@@ -119,7 +131,7 @@ _returnListViewWithTasks(HomeViewModel viewModel) {
               }
 
               viewModel.openPageAndUpdateTasksWhenComeBack(
-                  context, EditTaskPage.route, taskId);
+                  context, EditTaskPage.route, _task.id);
             },
             onTap: () => viewModel.switchExpandState(index),
             child: TaskCard(

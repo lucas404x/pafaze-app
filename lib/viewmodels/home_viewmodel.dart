@@ -15,6 +15,10 @@ class HomeViewModel extends ChangeNotifier {
   List<ListTaskModel> get tasks => _tasks;
 
   int _tasksDoneQuantity = 0;
+  bool get taskDoneExist => _tasksDoneQuantity > 0;
+
+  bool _showTasksDone = false;
+  bool get showTasksDone => _showTasksDone;
 
   final List<ListTaskModel> _tasksLate = List.empty(growable: true);
   List<ListTaskModel> get tasksLate => _tasksLate;
@@ -83,6 +87,11 @@ class HomeViewModel extends ChangeNotifier {
     }
   }
 
+  void switchShowDoneTasksState() {
+    _showTasksDone = !_showTasksDone;
+    notifyListeners();
+  }
+
   void switchExpandState(int taskPosition) {
     _tasks[taskPosition].expand = !_tasks[taskPosition].expand;
     notifyListeners();
@@ -101,9 +110,10 @@ class HomeViewModel extends ChangeNotifier {
   }
 
   void onTaskRemove(ListTaskModel listTask) async {
-    await _taskService.removeTask(listTask.task.id);
-    _tasks.remove(listTask);
-    _updatePinnedCard();
-    notifyListeners();
+    if (await _taskService.removeTask(listTask.task.id)) {
+      _tasks.remove(listTask);
+      _updatePinnedCard();
+      notifyListeners();
+    }
   }
 }
