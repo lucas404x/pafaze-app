@@ -34,6 +34,10 @@ class EditTaskViewModel extends ChangeNotifier {
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
 
+  bool get canEditTask =>
+      !_task.isDone &&
+      _task.taskDeliveryState != TaskDeliveryState.deliveryLate;
+
   EditTaskViewModel(this._taskId, this._taskService);
 
   void setup() async {

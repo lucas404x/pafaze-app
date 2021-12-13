@@ -3,10 +3,12 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:stacked/stacked.dart';
 
+import '../const/colors.dart';
 import '../services/task_service.dart';
 import '../utils/DateTimeUtils.dart';
 import '../viewmodels/edit_task_viewmodel.dart';
 import '../widgets/background_text.dart';
+import '../widgets/label_button.dart';
 
 class EditTaskPage extends StatelessWidget {
   const EditTaskPage({Key? key}) : super(key: key);
@@ -35,7 +37,18 @@ class EditTaskPage extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
+                                viewModel.canEditTask
+                                    ? Container()
+                                    : LabelButton(
+                                        onTap: () {},
+                                        backgroudColor:
+                                            ColorsApp.disableTaskDoneBgColor,
+                                        textColor:
+                                            ColorsApp.disableTaskDoneTxtColor,
+                                        text:
+                                            'Atenção! Está tarefa está apenas em modo de visualização'),
                                 TextFormField(
+                                  enabled: viewModel.canEditTask,
                                   validator: viewModel.titleValidator,
                                   controller: viewModel.titleController,
                                   keyboardType: TextInputType.multiline,
@@ -53,6 +66,7 @@ class EditTaskPage extends StatelessWidget {
                                           fontSize: 24)),
                                 ),
                                 TextFormField(
+                                    enabled: viewModel.canEditTask,
                                     controller: viewModel.descriptionController,
                                     keyboardType: TextInputType.multiline,
                                     maxLines: null,
@@ -83,8 +97,9 @@ class EditTaskPage extends StatelessWidget {
                                         activeColor:
                                             Theme.of(context).primaryColor,
                                         value: viewModel.isToDeliveryTask,
-                                        onChanged:
-                                            viewModel.switchDeliveryState)
+                                        onChanged: viewModel.canEditTask
+                                            ? viewModel.switchDeliveryState
+                                            : null)
                                   ],
                                 ),
                                 viewModel.isToDeliveryTask
@@ -94,16 +109,18 @@ class EditTaskPage extends StatelessWidget {
                                         children: [
                                           const Text('Data'),
                                           TextButton(
-                                              onPressed: () =>
-                                                  DatePicker.showDateTimePicker(
-                                                    context,
-                                                    locale: LocaleType.pt,
-                                                    minTime: DateTime.now().add(
-                                                        const Duration(
-                                                            minutes: 10)),
-                                                    onConfirm: viewModel
-                                                        .updateDeliveryDate,
-                                                  ),
+                                              onPressed: viewModel.canEditTask
+                                                  ? () => DatePicker
+                                                          .showDateTimePicker(
+                                                        context,
+                                                        locale: LocaleType.pt,
+                                                        minTime: DateTime.now()
+                                                            .add(const Duration(
+                                                                minutes: 10)),
+                                                        onConfirm: viewModel
+                                                            .updateDeliveryDate,
+                                                      )
+                                                  : null,
                                               child: Text(
                                                 viewModel.deliveryDate == null
                                                     ? 'Selecione a data'
@@ -117,25 +134,24 @@ class EditTaskPage extends StatelessWidget {
                                       )
                                     : Container(),
                                 ElevatedButton(
-                                    style: ButtonStyle(
-                                        elevation: MaterialStateProperty.all(0),
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
-                                                Theme.of(context)
-                                                    .primaryColor)),
-                                    onPressed: () async {
-                                      String? result = await viewModel
-                                          .validateAndUpdateTask();
-                                      if (result == null) {
-                                        Navigator.of(context).pop(true);
-                                        return;
-                                      }
+                                    style: ElevatedButton.styleFrom(
+                                        primary:
+                                            Theme.of(context).primaryColor),
+                                    onPressed: viewModel.canEditTask
+                                        ? () async {
+                                            String? result = await viewModel
+                                                .validateAndUpdateTask();
+                                            if (result == null) {
+                                              Navigator.of(context).pop(true);
+                                              return;
+                                            }
 
-                                      var snackBar =
-                                          SnackBar(content: Text(result));
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(snackBar);
-                                    },
+                                            var snackBar =
+                                                SnackBar(content: Text(result));
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(snackBar);
+                                          }
+                                        : null,
                                     child: const Text(
                                       'Confirmar alterações',
                                       style: TextStyle(color: Colors.white),
