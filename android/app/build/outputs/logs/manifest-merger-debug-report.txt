@@ -6,8 +6,10 @@ INJECTED from E:\Programming\flutter\pafaze-app\android\app\src\main\AndroidMani
 INJECTED from E:\Programming\flutter\pafaze-app\android\app\src\main\AndroidManifest.xml:1:1-59:12
 MERGED from E:\Programming\flutter\pafaze-app\android\app\src\main\AndroidManifest.xml:1:1-59:12
 MERGED from [:android_alarm_manager_plus] E:\Programming\flutter\pafaze-app\build\android_alarm_manager_plus\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:flutter_local_notifications] E:\Programming\flutter\pafaze-app\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-28:12
 MERGED from [:path_provider_android] E:\Programming\flutter\pafaze-app\build\path_provider_android\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.appcompat:appcompat:1.3.1] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\e564ae87c4b2de4886369e7dffef634b\appcompat-1.3.1\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media:media:1.1.0] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\1ff4bcb3167a74d75651e794e1872ecc\media-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.fragment:fragment:1.3.6] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\062fa1659e0ac451f55bfe6f052dcda0\fragment-1.3.6\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.activity:activity:1.2.4] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\1cf286a2806b0f661ea8852261de95a5\jetified-activity-1.2.4\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat-resources:1.3.1] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\3b31dd377cd3b80f9b4c58fa8046a2f5\jetified-appcompat-resources-1.3.1\AndroidManifest.xml:17:1-24:12
@@ -18,6 +20,7 @@ MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\Jos
 MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\42415d22b488b741b7e8fbc712464c00\vectordrawable-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.customview:customview:1.0.0] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\bc28a09d8d2212ffd5788fe6c1853326\customview-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.core:core:1.6.0] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\5f663b08eec19eef9a9d1af662d9025e\core-1.6.0\AndroidManifest.xml:17:1-26:12
+MERGED from [com.jakewharton.threetenabp:threetenabp:1.2.3] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\f2e73ae2c927c5e2323136b4ee464011\jetified-threetenabp-1.2.3\AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\87cae496edf0d81af80ab48e3e89ecce\versionedparcelable-1.1.1\AndroidManifest.xml:17:1-27:12
 MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\1fdddb698f5b73fbeb212822ee0a08f1\jetified-tracing-1.0.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\d6c2e54771524a931cd2bdacc9b51b98\lifecycle-runtime-2.3.1\AndroidManifest.xml:17:1-24:12
@@ -49,6 +52,8 @@ INJECTED from E:\Programming\flutter\pafaze-app\android\app\src\debug\AndroidMan
 		ADDED from E:\Programming\flutter\pafaze-app\android\app\src\main\AndroidManifest.xml:1:11-69
 uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
 ADDED from E:\Programming\flutter\pafaze-app\android\app\src\main\AndroidManifest.xml:4:4-79
+MERGED from [:flutter_local_notifications] E:\Programming\flutter\pafaze-app\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-81
+MERGED from [:flutter_local_notifications] E:\Programming\flutter\pafaze-app\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-81
 	android:name
 		ADDED from E:\Programming\flutter\pafaze-app\android\app\src\main\AndroidManifest.xml:4:21-77
 uses-permission#android.permission.WAKE_LOCK
@@ -57,8 +62,12 @@ ADDED from E:\Programming\flutter\pafaze-app\android\app\src\main\AndroidManifes
 		ADDED from E:\Programming\flutter\pafaze-app\android\app\src\main\AndroidManifest.xml:5:21-64
 application
 ADDED from E:\Programming\flutter\pafaze-app\android\app\src\main\AndroidManifest.xml:6:4-58:19
+MERGED from [:flutter_local_notifications] E:\Programming\flutter\pafaze-app\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-26:19
+MERGED from [:flutter_local_notifications] E:\Programming\flutter\pafaze-app\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-26:19
 MERGED from [androidx.core:core:1.6.0] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\5f663b08eec19eef9a9d1af662d9025e\core-1.6.0\AndroidManifest.xml:24:5-89
 MERGED from [androidx.core:core:1.6.0] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\5f663b08eec19eef9a9d1af662d9025e\core-1.6.0\AndroidManifest.xml:24:5-89
+MERGED from [com.jakewharton.threetenabp:threetenabp:1.2.3] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\f2e73ae2c927c5e2323136b4ee464011\jetified-threetenabp-1.2.3\AndroidManifest.xml:7:5-20
+MERGED from [com.jakewharton.threetenabp:threetenabp:1.2.3] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\f2e73ae2c927c5e2323136b4ee464011\jetified-threetenabp-1.2.3\AndroidManifest.xml:7:5-20
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\87cae496edf0d81af80ab48e3e89ecce\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\87cae496edf0d81af80ab48e3e89ecce\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
 	android:appComponentFactory
@@ -143,10 +152,14 @@ INJECTED from E:\Programming\flutter\pafaze-app\android\app\src\main\AndroidMani
 INJECTED from E:\Programming\flutter\pafaze-app\android\app\src\main\AndroidManifest.xml
 MERGED from [:android_alarm_manager_plus] E:\Programming\flutter\pafaze-app\build\android_alarm_manager_plus\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:android_alarm_manager_plus] E:\Programming\flutter\pafaze-app\build\android_alarm_manager_plus\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_local_notifications] E:\Programming\flutter\pafaze-app\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_local_notifications] E:\Programming\flutter\pafaze-app\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:path_provider_android] E:\Programming\flutter\pafaze-app\build\path_provider_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:path_provider_android] E:\Programming\flutter\pafaze-app\build\path_provider_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [androidx.appcompat:appcompat:1.3.1] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\e564ae87c4b2de4886369e7dffef634b\appcompat-1.3.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.appcompat:appcompat:1.3.1] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\e564ae87c4b2de4886369e7dffef634b\appcompat-1.3.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media:media:1.1.0] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\1ff4bcb3167a74d75651e794e1872ecc\media-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media:media:1.1.0] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\1ff4bcb3167a74d75651e794e1872ecc\media-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.fragment:fragment:1.3.6] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\062fa1659e0ac451f55bfe6f052dcda0\fragment-1.3.6\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.fragment:fragment:1.3.6] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\062fa1659e0ac451f55bfe6f052dcda0\fragment-1.3.6\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.activity:activity:1.2.4] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\1cf286a2806b0f661ea8852261de95a5\jetified-activity-1.2.4\AndroidManifest.xml:20:5-22:41
@@ -167,6 +180,8 @@ MERGED from [androidx.customview:customview:1.0.0] C:\Users\Josel\.gradle\caches
 MERGED from [androidx.customview:customview:1.0.0] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\bc28a09d8d2212ffd5788fe6c1853326\customview-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.core:core:1.6.0] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\5f663b08eec19eef9a9d1af662d9025e\core-1.6.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.core:core:1.6.0] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\5f663b08eec19eef9a9d1af662d9025e\core-1.6.0\AndroidManifest.xml:20:5-22:41
+MERGED from [com.jakewharton.threetenabp:threetenabp:1.2.3] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\f2e73ae2c927c5e2323136b4ee464011\jetified-threetenabp-1.2.3\AndroidManifest.xml:5:5-44
+MERGED from [com.jakewharton.threetenabp:threetenabp:1.2.3] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\f2e73ae2c927c5e2323136b4ee464011\jetified-threetenabp-1.2.3\AndroidManifest.xml:5:5-44
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\87cae496edf0d81af80ab48e3e89ecce\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\87cae496edf0d81af80ab48e3e89ecce\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\Josel\.gradle\caches\transforms-2\files-2.1\1fdddb698f5b73fbeb212822ee0a08f1\jetified-tracing-1.0.0\AndroidManifest.xml:20:5-22:41
@@ -203,3 +218,41 @@ uses-permission#android.permission.INTERNET
 ADDED from E:\Programming\flutter\pafaze-app\android\app\src\debug\AndroidManifest.xml:6:5-66
 	android:name
 		ADDED from E:\Programming\flutter\pafaze-app\android\app\src\debug\AndroidManifest.xml:6:22-64
+uses-permission#android.permission.VIBRATE
+ADDED from [:flutter_local_notifications] E:\Programming\flutter\pafaze-app\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-66
+	android:name
+		ADDED from [:flutter_local_notifications] E:\Programming\flutter\pafaze-app\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:8:22-63
+uses-permission#android.permission.USE_FULL_SCREEN_INTENT
+ADDED from [:flutter_local_notifications] E:\Programming\flutter\pafaze-app\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-81
+	android:name
+		ADDED from [:flutter_local_notifications] E:\Programming\flutter\pafaze-app\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:9:22-78
+uses-permission#android.permission.SCHEDULE_EXACT_ALARM
+ADDED from [:flutter_local_notifications] E:\Programming\flutter\pafaze-app\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:10:5-79
+	android:name
+		ADDED from [:flutter_local_notifications] E:\Programming\flutter\pafaze-app\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:10:22-76
+receiver#com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver
+ADDED from [:flutter_local_notifications] E:\Programming\flutter\pafaze-app\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:13:9-15:40
+	android:exported
+		ADDED from [:flutter_local_notifications] E:\Programming\flutter\pafaze-app\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:15:13-37
+	android:name
+		ADDED from [:flutter_local_notifications] E:\Programming\flutter\pafaze-app\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:14:13-97
+receiver#com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver
+ADDED from [:flutter_local_notifications] E:\Programming\flutter\pafaze-app\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:16:9-25:20
+	android:exported
+		ADDED from [:flutter_local_notifications] E:\Programming\flutter\pafaze-app\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:18:13-37
+	android:name
+		ADDED from [:flutter_local_notifications] E:\Programming\flutter\pafaze-app\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:17:13-101
+intent-filter#action:name:android.intent.action.BOOT_COMPLETED+action:name:android.intent.action.MY_PACKAGE_REPLACED+action:name:android.intent.action.QUICKBOOT_POWERON+action:name:com.htc.intent.action.QUICKBOOT_POWERON
+ADDED from [:flutter_local_notifications] E:\Programming\flutter\pafaze-app\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:19:13-24:29
+action#android.intent.action.MY_PACKAGE_REPLACED
+ADDED from [:flutter_local_notifications] E:\Programming\flutter\pafaze-app\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:21:17-84
+	android:name
+		ADDED from [:flutter_local_notifications] E:\Programming\flutter\pafaze-app\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:21:25-81
+action#android.intent.action.QUICKBOOT_POWERON
+ADDED from [:flutter_local_notifications] E:\Programming\flutter\pafaze-app\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:22:17-82
+	android:name
+		ADDED from [:flutter_local_notifications] E:\Programming\flutter\pafaze-app\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:22:25-79
+action#com.htc.intent.action.QUICKBOOT_POWERON
+ADDED from [:flutter_local_notifications] E:\Programming\flutter\pafaze-app\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:23:17-82
+	android:name
+		ADDED from [:flutter_local_notifications] E:\Programming\flutter\pafaze-app\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:23:25-79
