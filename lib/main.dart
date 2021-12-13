@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:pafaze/data/enumerators/enum_task_delivery_state.dart';
 import 'package:pafaze/data/models/alarm_model.dart';
 import 'package:pafaze/services/alarm_service.dart';
+import 'package:pafaze/services/notification_service.dart';
 import 'package:pafaze/services/task_service.dart';
 
 import 'data/models/task_model.dart';
@@ -57,6 +58,8 @@ setup() async {
 
   // register services in get_it
   getIt.registerSingleton<TaskService>(taskService);
+
+  await NotificationService.init();
 }
 
 class MyApp extends StatelessWidget {
@@ -76,7 +79,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primaryColor: Colors.black,
           scaffoldBackgroundColor: const Color(0xFFF9F9F9),
-          splashColor: Colors.blue,
           textTheme: TextTheme(
             headline1: GoogleFonts.openSans(
                 fontSize: 81, fontWeight: FontWeight.w300, letterSpacing: -1.5),
