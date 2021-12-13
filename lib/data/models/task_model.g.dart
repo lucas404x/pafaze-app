@@ -23,7 +23,7 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
       ..isDone = fields[3] as bool
       ..dateCreated = fields[4] as DateTime
       ..dateToDelivery = fields[5] as DateTime
-      ..isToDelivery = fields[6] as bool;
+      ..taskDeliveryState = fields[6] as TaskDeliveryState;
   }
 
   @override
@@ -43,7 +43,7 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
       ..writeByte(5)
       ..write(obj.dateToDelivery)
       ..writeByte(6)
-      ..write(obj.isToDelivery);
+      ..write(obj.taskDeliveryState);
   }
 
   @override

@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import '../enumerators/enum_task_delivery_state.dart';
 
 import 'add_task_model.dart';
 
@@ -25,7 +26,7 @@ class TaskModel {
   late DateTime dateToDelivery = DateTime.now().toUtc();
 
   @HiveField(6)
-  late bool isToDelivery = false;
+  late TaskDeliveryState taskDeliveryState = TaskDeliveryState.notDelivery;
 
   TaskModel();
 
@@ -33,6 +34,6 @@ class TaskModel {
     title = model.title;
     description = model.description;
     dateToDelivery = model.dateToDelivery;
-    isToDelivery = model.isToDelivery;
+    taskDeliveryState = model.deliveryState;
   }
 }

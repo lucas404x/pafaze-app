@@ -1,3 +1,5 @@
+import 'package:pafaze/data/enumerators/enum_task_delivery_state.dart';
+
 import '../data/models/list_task_model.dart';
 
 class ListUtils {
@@ -6,11 +8,15 @@ class ListUtils {
   }
 
   static int compareByDateToDelivery(ListTaskModel t1, ListTaskModel t2) {
-    if (!t1.task.isToDelivery && !t2.task.isToDelivery) {
+    var t1DeliveryState = t1.task.taskDeliveryState;
+    var t2DeliveryState = t2.task.taskDeliveryState;
+    var delivery = TaskDeliveryState.delivery;
+
+    if (t1DeliveryState != delivery && t2DeliveryState != delivery) {
       return 0;
-    } else if (t1.task.isToDelivery && !t2.task.isToDelivery) {
+    } else if (t1DeliveryState == delivery && t2DeliveryState != delivery) {
       return -1;
-    } else if (!t1.task.isToDelivery && t2.task.isToDelivery) {
+    } else if (t1DeliveryState != delivery && t2DeliveryState == delivery) {
       return 1;
     }
 
