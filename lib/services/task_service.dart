@@ -1,3 +1,5 @@
+import 'package:pafaze/utils/DateTimeUtils.dart';
+
 import '../data/enumerators/enum_task_delivery_state.dart';
 import '../data/models/alarm_model.dart';
 import '../data/models/list_task_model.dart';
@@ -18,8 +20,21 @@ class TaskService {
   Future<List<ListTaskModel>> getTasks() async {
     var tasks = await _storageService.getTasks();
     return tasks
-        .map((task) => ListTaskModel(task, false))
+        .where((task) => !DateTimeUtils.isDeliveryDateLate(task))
+        .map((task) => ListTaskModel(task, !task.isDone, false))
         .toList(growable: true);
+  }
+
+  Future<List<ListTaskModel>> getOnlyDoneTasks(
+      List<ListTaskModel> listTasks) async {
+    return listTasks.where((listTask) => listTask.task.isDone).toList();
+  }
+
+  Future<List<ListTaskModel>> getOnlyLateTasks(
+      List<ListTaskModel> listTasks) async {
+    return listTasks
+        .where((listTask) => DateTimeUtils.isDeliveryDateLate(listTask.task))
+        .toList();
   }
 
   Future<bool> removeTask(String id) async {
@@ -44,6 +59,11 @@ class TaskService {
     }
 
     return true;
+  }
+
+  Future<bool> markTaskAsDone(TaskModel task) {
+    task.isDone = true;
+    return updateTask(task.id, task);
   }
 
   Future<bool> updateTask(String taskId, TaskModel task) {
