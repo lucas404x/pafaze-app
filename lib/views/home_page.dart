@@ -112,6 +112,7 @@ _returnPopupMenu(HomeViewModel viewModel) {
 
 _returnListViewWithTasks(HomeViewModel viewModel) {
   return ListView.builder(
+      physics: const BouncingScrollPhysics(),
       itemCount: viewModel.tasks.length,
       itemBuilder: (context, index) {
         var _task = viewModel.tasks[index].task;

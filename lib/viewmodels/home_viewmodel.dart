@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../const/colors.dart';
 
+import '../const/colors.dart';
+import '../data/enumerators/enum_task_delivery_state.dart';
 import '../data/enumerators/enum_task_sort_mode.dart';
 import '../data/models/list_task_model.dart';
 import '../data/models/pinned_card_model.dart';
@@ -8,8 +9,7 @@ import '../services/task_service.dart';
 import '../utils/ListUtils.dart';
 
 class HomeViewModel extends ChangeNotifier {
-  final String _enableTaskDoneTxt =
-      'Clique aqui para exibir tarefas concluidas';
+  final String _enableTaskDoneTxt = 'Exibir tarefas concluidas';
   final String _disableTaskDoneTxt = 'Ocultar tarefas concluídas';
 
   Color get labelBgColor => _showTasksDone
@@ -40,14 +40,14 @@ class HomeViewModel extends ChangeNotifier {
   final PinnedCardModel _pinnedCard = PinnedCardModel();
   PinnedCardModel get pinnedCard => _pinnedCard;
 
-  TaskSortMode _cachedMode = TaskSortMode.dateCreated;
+  TaskSortMode _cachedMode = TaskSortMode.ascendingTitle;
 
   HomeViewModel(this._taskService);
 
   void updateTasks() async {
+    _tasks.clear();
     _tasks.addAll(await _taskService.getTasks());
     _tasksDoneQuantity = await _taskService.getDoneTasksQuantity(_tasks);
-    _tasksLate.addAll(await _taskService.getOnlyLateTasks(_tasks));
     _updatePinnedCard();
     sortTasks(TaskSortMode.dateCreated);
     notifyListeners();
