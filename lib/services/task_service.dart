@@ -37,25 +37,24 @@ class TaskService {
   }
 
   Future<bool> removeTask(String id) async {
-    bool result = await _storageService.removeTask(id);
-    // AlarmModel? alarm = await _storageService.getAlarm(id);
-    // if (alarm != null) {
-    //   _storageService.removeTask(alarm.taskId);
-    //   _alarmManagerService.cancelTaskAlarm(alarm.id);
-    //   return true;
-    // }
+    await _storageService.removeTask(id);
+    AlarmModel? alarm = await _storageService.getAlarm(id);
+    if (alarm != null) {
+      _storageService.removeTask(alarm.taskId);
+      _alarmManagerService.cancelTaskAlarm(alarm.id);
+      return true;
+    }
 
-    return result;
+    return false;
   }
 
   Future<bool> registerTask(TaskModel task) async {
     String taskId = await _storageService.registerTask(task);
     if (task.taskDeliveryState == TaskDeliveryState.delivery) {
-      int alarmId = await _alarmManagerService
-          .registerTaskAlarm(task.dateToDelivery.toLocal());
-
+      var date = task.dateToDelivery.toLocal();
+      int alarmId = await _alarmManagerService.registerTaskAlarm(date);
       AlarmModel alarm = AlarmModel.init(alarmId, taskId);
-      _storageService.registerAlarm(alarm);
+      await _storageService.registerAlarm(alarm);
     }
 
     return true;

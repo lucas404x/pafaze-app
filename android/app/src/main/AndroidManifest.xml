@@ -3,9 +3,13 @@
     
    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+   <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+   
    <application
+        android:name = "io.flutter.app.FlutterApplication"
         android:label="pafaze"
         android:icon="@mipmap/ic_launcher">
+
     <service
       android:name="dev.fluttercommunity.plus.androidalarmmanager.AlarmService"
       android:permission="android.permission.BIND_JOB_SERVICE"
