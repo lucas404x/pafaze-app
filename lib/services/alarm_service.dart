@@ -21,7 +21,8 @@ class AlarmManagerService {
   }
 
   int _generateRandomAlarmId() {
-    return Random().nextInt(0x7FFFFFFF - 1);
+    return Random(DateTime.now().millisecondsSinceEpoch)
+        .nextInt(0x7FFFFFFF - 1);
   }
 
   static _notifyUserAboutTask(int alarmId) async {
