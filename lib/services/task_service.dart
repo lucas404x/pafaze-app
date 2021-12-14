@@ -27,15 +27,13 @@ class TaskService {
   }
 
   Future<bool> removeTask(String id) async {
-    await _storageService.removeTask(id);
     AlarmModel? alarm = await _storageService.getAlarm(id);
     if (alarm != null) {
-      _storageService.removeTask(alarm.taskId);
-      _alarmManagerService.cancelTaskAlarm(alarm.id);
-      return true;
+      await _alarmManagerService.cancelTaskAlarm(alarm.id);
     }
 
-    return false;
+    await _storageService.removeTask(id);
+    return true;
   }
 
   Future<bool> registerTask(TaskModel task) async {
@@ -52,10 +50,13 @@ class TaskService {
 
   Future<bool> markTaskAsDone(TaskModel task) {
     task.isDone = true;
-    return updateTask(task.id, task);
+    return _storageService.updateTask(task.id, task);
   }
 
-  Future<bool> updateTask(String taskId, TaskModel task) {
-    return _storageService.updateTask(taskId, task);
+  Future<bool> updateTask(String taskId, TaskModel task) async {
+    if (await removeTask(taskId)) {
+      return await registerTask(task);
+    }
+    return false;
   }
 }
