@@ -25,8 +25,7 @@ class EditTaskViewModel extends ChangeNotifier {
   DateTime? _deliveryDate;
   DateTime? get deliveryDate => _deliveryDate;
 
-  late TaskModel _task;
-  TaskModel get task => _task;
+  TaskModel _task = TaskModel();
 
   bool _hasError = false;
   bool get hasError => _hasError;
